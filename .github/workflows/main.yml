@@ -37,11 +37,11 @@ jobs:
 
       - name: exec module2 package
         if: steps.changes.outputs.module2 == 'true'
-        run: echo 'module1 changed'
+        run: echo 'module2 changed'
 
       - name: exec module3 package
         if: steps.changes.outputs.module3 == 'true'
-        run: echo 'module1 changed'
+        run: echo 'module3 changed'
 
 
 
