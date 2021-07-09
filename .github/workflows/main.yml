@@ -6,7 +6,7 @@ name: auto deploy service
 on:
   push:
     branches:
-      - cicd
+      - main
 
 jobs:
   build:
@@ -15,6 +15,6 @@ jobs:
       - name: Webhook
         uses: joelwmale/webhook-action@master
         with:
-          url: ${{ secrets.WEBHOOK_URL }}
-          headers: '{"repository": "joelwmale/webhook-action"}'
-          body: '{"event": "deployment", "repository": "joelwmale/webhook-action"}'
+          url: ${{ secrets.FEISHU_DEPLOY_WEBHOOK }}
+#           headers: '{"repository": "joelwmale/webhook-action"}'
+          body: '{"ext":"维示泰克服务部署通知","i18n_elements": {"zh_cn": [{"tag": "div","text": {"tag": "lark_md","content": "**服务部署通知**"}},{"tag": "div","text": {"tag": "lark_md","content": "M3Game 【开发环境】服务已经发布"}},{"tag": "action","actions": [{"tag": "button","text": {"tag": "plain_text","content": "查看最新文档"},"url": "http://106.75.178.36:9000/m3game-m3game/swagger-ui.html","type": "primary"}]}]}}'
