@@ -9,12 +9,49 @@ on:
       - main
 
 jobs:
-  build:
+  checkout:
     runs-on: ubuntu-latest
     steps:
-      - name: Webhook
-        uses: joelwmale/webhook-action@master
+      - uses: actions/checkout@v2
+      - name: check for file changes
+        uses: dorny/paths-filter@v2
+        id: changes
         with:
-          url: ${{ secrets.FEISHU_DEPLOY_WEBHOOK }}
-#           headers: '{"repository": "joelwmale/webhook-action"}'
-          body: '{"msg_type": "interactive","card": {"i18n_elements": {"zh_cn": [{"tag": "div","text": {"tag": "lark_md","content": "**服务部署通知**"}},{"tag": "div","text": {"tag": "lark_md","content": "M3Game 【开发环境】服务已经发布"}},{"tag": "action","actions": [{"tag": "button","text": {"tag": "plain_text","content": "查看最新文档"},"url": "http://106.75.178.36:9000/m3game-m3game/swagger-ui.html","type": "primary"}]}]}}}'
+          filters: |
+            module1:
+              - 'module1/**'
+            module2:
+              - 'module2/**'
+            module3:
+              - 'module3/**'
+
+      - name: print changes details
+        run: |
+          echo '$(steps.changes.outputs.module1)'
+          echo '$(steps.changes.outputs.module2)'
+          echo '$(steps.changes.outputs.module3)'
+
+      - name: exec module1 package
+        if: steps.changes.outputs.module1 == 'true'
+        run: echo 'module1 changed'
+
+      - name: exec module2 package
+        if: steps.changes.outputs.module2 == 'true'
+        run: echo 'module1 changed'
+
+      - name: exec module3 package
+        if: steps.changes.outputs.module3 == 'true'
+        run: echo 'module1 changed'
+
+
+
+#jobs:
+#  build:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Webhook
+#        uses: joelwmale/webhook-action@master
+#        with:
+#          url: ${{ secrets.FEISHU_DEPLOY_WEBHOOK }}
+##           headers: '{"repository": "joelwmale/webhook-action"}'
+#          body: '{"msg_type": "interactive","card": {"i18n_elements": {"zh_cn": [{"tag": "div","text": {"tag": "lark_md","content": "**服务部署通知**"}},{"tag": "div","text": {"tag": "lark_md","content": "M3Game 【开发环境】服务已经发布"}},{"tag": "action","actions": [{"tag": "button","text": {"tag": "plain_text","content": "查看最新文档"},"url": "http://106.75.178.36:9000/m3game-m3game/swagger-ui.html","type": "primary"}]}]}}}'
