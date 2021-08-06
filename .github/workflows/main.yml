@@ -53,4 +53,4 @@ jobs:
         uses: joelwmale/webhook-action@master
         with:
           url: ${{ secrets.FEISHU_DEPLOY_WEBHOOK }}
-          body: '{"msg_type": "interactive","card": {"i18n_elements": {"zh_cn": [{"tag": "div","text": {"tag": "lark_md","content": "**服务部署通知**"}},{"tag": "div","text": {"tag": "lark_md","content": "CICD测试服务正在启动,预计1分钟以后可正常访问"}},{"tag": "div","text": {"tag": "lark_md","content": ${{github.event.head_commit.message}} }},{"tag": "action","actions": [{"tag": "button","text": {"tag": "plain_text","content": "查看认证中心文档"},"url": "http://www.baidu.com","type": "primary"}]}]}}}'
+          body: '{"msg_type": "interactive","card": {"i18n_elements": {"zh_cn": [{"tag": "div","text": {"tag": "lark_md","content": "**服务部署通知**"}},{"tag": "div","text": {"tag": "lark_md","content": "CICD测试服务正在启动,预计1分钟以后可正常访问"}},{"tag": "div","text": {"tag": "lark_md","content": "${{github.event.head_commit.message}}" }},{"tag": "action","actions": [{"tag": "button","text": {"tag": "plain_text","content": "查看认证中心文档"},"url": "http://www.baidu.com","type": "primary"}]}]}}}'
